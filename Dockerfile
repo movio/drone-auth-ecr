@@ -8,6 +8,7 @@ ENV PATH=/root/.local/bin:$PATH
 
 ## Copy AWS config, credentials should be automatically pulled from IAM role associated with drone instance
 COPY config/config /root/.aws/config
+ADD script.sh /bin/
 
 #install the aws prereqs
 RUN apt-get update \
@@ -29,5 +30,7 @@ RUN set -x \
     && apt-get -q -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install docker-engine \
     && apt-get clean \
     && rm -Rf /var/lib/apt/lists/* 2>/dev/null \
+    && chmod +x /bin/script.sh \
     && service docker start 
 
+ENTRYPOINT /bin/script.sh

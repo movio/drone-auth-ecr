@@ -1,0 +1,9 @@
+version: '3'
+services:
+    plugin:
+        build: 
+            context: .
+        environment:
+        - PLUGIN_REGION=apply
+        - PLUGIN_REGISTRY_ID=864091978270
+        - PLUGIN_ECR_IMAGE=864091978270.dkr.ecr.ap-southeast-2.amazonaws.com/drone-kubernetes:alpha
